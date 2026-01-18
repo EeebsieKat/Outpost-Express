@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cknmhp7nc36n2"]
+
+[ext_resource type="PackedScene" uid="uid://cu7inxs6cfvnk" path="res://Scenes/Components/collectable_component.tscn" id="2_p1280"]
+[ext_resource type="Texture2D" uid="uid://dcu2pct4j0mxd" path="res://Assets/Items/Kyrises_16x16_RPG_Icon_Pack_V1.3/Kyrise's 16x16 RPG Icon Pack - V1.3/icons/32x32/gift_01c.png" id="2_y4602"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fr4cl"]
+size = Vector2(26, 28)
+
+[node name="Package1" type="Sprite2D"]
+light_mask = 4
+texture = ExtResource("2_y4602")
+
+[node name="CollectableComponent" parent="." instance=ExtResource("2_p1280")]
+collision_layer = 4
+collision_mask = 2
+collectable_name = "Package 1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_fr4cl")
+debug_color = Color(0.7546979, 0.41280565, 0.5248932, 0.41960785)
+
+[connection signal="body_entered" from="CollectableComponent" to="CollectableComponent" method="_on_body_entered"]

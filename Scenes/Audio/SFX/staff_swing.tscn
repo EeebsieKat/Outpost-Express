@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bodm34xn2d01u"]
+
+[ext_resource type="AudioStream" uid="uid://df86y0g18hi36" path="res://Assets/Music/StaffSwing.ogg" id="1_jonla"]
+
+[node name="StaffSwing" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_jonla")
+bus = &"SFX"

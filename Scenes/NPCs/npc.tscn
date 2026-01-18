@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl87g71jsgef4"]
+
+[ext_resource type="Script" uid="uid://xaaf1825a8fj" path="res://npc.gd" id="1_7lr2c"]
+[ext_resource type="Texture2D" uid="uid://sx36nmcodlww" path="res://icon.svg" id="2_n58mx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q0ilr"]
+radius = 15.0
+height = 60.0
+
+[node name="NPC" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.5)
+texture = ExtResource("2_n58mx")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_7lr2c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_q0ilr")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CapsuleShape2D_q0ilr")

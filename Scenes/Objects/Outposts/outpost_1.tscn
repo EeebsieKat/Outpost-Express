@@ -1,0 +1,189 @@
+[gd_scene load_steps=20 format=3 uid="uid://cp8k8bqjqv25g"]
+
+[ext_resource type="Texture2D" uid="uid://bamoxdvdw4cce" path="res://Assets/villagethings/2 Objects/7 House/4_inside.png" id="1_h6jop"]
+[ext_resource type="Texture2D" uid="uid://cvdifh63jxva3" path="res://Assets/villagethings/2 Objects/7 House/4.png" id="1_tdyri"]
+[ext_resource type="PackedScene" uid="uid://b4ylj518b0pft" path="res://Scenes/Objects/Outposts/door.tscn" id="2_2v3vl"]
+[ext_resource type="Texture2D" uid="uid://df5dnccvhc864" path="res://Assets/Characters/Player/Big_Light_Bright_Yellow.png" id="2_vr8ee"]
+[ext_resource type="Texture2D" uid="uid://1yvykjslbco0" path="res://Assets/Characters/Player/Lantern.png" id="3_hs0t1"]
+[ext_resource type="Texture2D" uid="uid://qraler3fbcr8" path="res://Assets/Characters/Player/Lantern_Light_Bright_Yellow.png" id="3_tdyri"]
+[ext_resource type="Script" uid="uid://cwix0ul12gs6r" path="res://Scenes/Objects/Outposts/go_to_outpost_scene_area.gd" id="5_wf2js"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jv73b"]
+atlas = ExtResource("1_h6jop")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m3olb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jv73b")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6jop"]
+atlas = ExtResource("1_tdyri")
+region = Rect2(0, 0, 154, 149)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hs0t1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6jop")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdyri"]
+atlas = ExtResource("3_hs0t1")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h6jop"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdyri")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdyri"]
+size = Vector2(104, 45.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xyrc4"]
+size = Vector2(22, 15.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2v3vl"]
+size = Vector2(54.5, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wf2js"]
+size = Vector2(27.5, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h6jop"]
+size = Vector2(8, 76)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wf2js"]
+polygon = PackedVector2Array(-136, 0, -136, -144, -248, -136, -248, 0, -280, 0, -280, -136, -296, -136, -296, -152, -312, -152, -312, -360, -128, -376, -128, -400, -112, -416, -112, -472, -104, -472, -104, -552, -24, -552, -24, -504, 72, -600, 280, -392, 272, -368, 288, -368, 312, -344, 312, -152, 296, -152, 296, -144, 280, -144, 280, 0)
+
+[node name="Outpost1" type="StaticBody2D"]
+position = Vector2(1, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="."]
+light_mask = 4
+position = Vector2(12, -31)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_m3olb")
+frame_progress = 1.0
+
+[node name="Door" parent="." instance=ExtResource("2_2v3vl")]
+position = Vector2(14, -63)
+scale = Vector2(2, 2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 0
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_hs0t1")
+autoplay = "default"
+offset = Vector2(0, -74)
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+light_mask = 0
+position = Vector2(110, 55)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_h6jop")
+offset = Vector2(-31, -54)
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+light_mask = 0
+position = Vector2(34, 55)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_h6jop")
+offset = Vector2(-31, -54)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(37, -106.5)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_tdyri")
+
+[node name="GoToOutpostSceneArea" type="Area2D" parent="."]
+script = ExtResource("5_wf2js")
+
+[node name="GoToOutpostScene" type="CollisionShape2D" parent="GoToOutpostSceneArea"]
+position = Vector2(10, -45.5)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_xyrc4")
+debug_color = Color(0.973841, 0, 0.43449995, 0.41960785)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(86.5, -30)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_2v3vl")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-39.5, -30)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_wf2js")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-132, -76)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_h6jop")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
+scale = Vector2(0.5, 0.5)
+occluder = SubResource("OccluderPolygon2D_wf2js")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+z_index = 1
+position = Vector2(47.658653, -51.34134)
+scale = Vector2(1.2134165, 1.2134165)
+energy = 16.0
+texture = ExtResource("2_vr8ee")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+light_mask = 2
+z_index = 1
+position = Vector2(47.658653, -51.34134)
+scale = Vector2(0.5257821, 0.5257821)
+energy = 16.0
+texture = ExtResource("2_vr8ee")
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+z_index = 1
+position = Vector2(41.658653, -61.34134)
+scale = Vector2(0.25, 0.25)
+energy = 30.0
+texture = ExtResource("3_tdyri")
+
+[node name="PointLight2D4" type="PointLight2D" parent="."]
+z_index = 1
+position = Vector2(-28.341347, -51.341347)
+scale = Vector2(1.2134165, 1.2134165)
+energy = 16.0
+texture = ExtResource("2_vr8ee")
+
+[node name="PointLight2D5" type="PointLight2D" parent="."]
+light_mask = 2
+z_index = 1
+position = Vector2(-28.341347, -51.341347)
+scale = Vector2(0.5257821, 0.5257821)
+energy = 16.0
+texture = ExtResource("2_vr8ee")
+
+[node name="PointLight2D6" type="PointLight2D" parent="."]
+z_index = 1
+position = Vector2(-28.341347, -51.341347)
+scale = Vector2(0.25, 0.25)
+energy = 30.0
+texture = ExtResource("3_tdyri")
+
+[connection signal="area_entered" from="GoToOutpostSceneArea" to="GoToOutpostSceneArea" method="_on_area_entered"]

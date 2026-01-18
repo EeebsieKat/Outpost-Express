@@ -1,0 +1,32 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cycgd36bcqa5c"]
+
+[ext_resource type="Texture2D" uid="uid://qbg4tio16uoq" path="res://Assets/Basic UI/Basic UI/BasicUIPackImageAll.png" id="1_1fvms"]
+[ext_resource type="Texture2D" uid="uid://c6n3klhqfl4gl" path="res://Assets/Basic UI/Basic UI/FuelProgress.png" id="2_p1w3f"]
+[ext_resource type="FontVariation" uid="uid://dlhrtl67c87ml" path="res://Assets/Fonts/ByteBounceVariant.tres" id="3_pd6sc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1w3f"]
+atlas = ExtResource("1_1fvms")
+region = Rect2(304, 53, 51, 10)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pd6sc"]
+texture = SubResource("AtlasTexture_p1w3f")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pd6sc"]
+atlas = ExtResource("2_p1w3f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2l2ys"]
+texture = SubResource("AtlasTexture_pd6sc")
+region_rect = Rect2(7, 0, 6, 21)
+
+[resource]
+FuelBar/base_type = &"ProgressBar"
+FuelBar/styles/background = SubResource("StyleBoxTexture_pd6sc")
+FuelBar/styles/fill = SubResource("StyleBoxTexture_2l2ys")
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("3_pd6sc")
+QuestLabel/base_type = &"RichTextLabel"
+QuestLabel/fonts/normal_font = ExtResource("3_pd6sc")

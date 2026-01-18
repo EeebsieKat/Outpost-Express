@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://1xaq4oncues3"]
+
+[ext_resource type="AudioStream" uid="uid://bt7i5d4v7lfch" path="res://Assets/Music/open-door.ogg" id="1_5ntbj"]
+
+[node name="OpenDoor" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_5ntbj")
+volume_db = 6.0
+bus = &"SFX"

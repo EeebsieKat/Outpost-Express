@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b3v35trfqwdlk"]
+
+[node name="Darkness" type="CanvasLayer"]
+
+[node name="Darkness" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07058824, 0.023529412, 0.07058824, 0.88235295)

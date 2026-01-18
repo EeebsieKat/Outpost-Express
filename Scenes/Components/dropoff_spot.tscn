@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs88wify015ve"]
+
+[ext_resource type="Script" uid="uid://bfvbnfxf4ueo0" path="res://dropoff_spot.gd" id="1_da082"]
+
+[node name="DropoffSpot" type="Area2D"]
+script = ExtResource("1_da082")

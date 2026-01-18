@@ -1,0 +1,229 @@
+[gd_scene load_steps=20 format=3 uid="uid://g0jlluuu1but"]
+
+[ext_resource type="Script" uid="uid://by17drtefw5bn" path="res://Scenes/Player/red.gd" id="1_0i3ku"]
+[ext_resource type="Texture2D" uid="uid://1yvykjslbco0" path="res://Assets/Characters/Player/Lantern.png" id="2_0i3ku"]
+[ext_resource type="PackedScene" uid="uid://bodm34xn2d01u" path="res://Scenes/Audio/SFX/staff_swing.tscn" id="2_cio05"]
+[ext_resource type="Texture2D" uid="uid://ry02dd4lug4f" path="res://Assets/Characters/Player/red_anims_small.png" id="2_dww6y"]
+[ext_resource type="Script" uid="uid://d4ljckphi4qlm" path="res://Scenes/Player/lantern_pivot.gd" id="3_2peue"]
+[ext_resource type="Texture2D" uid="uid://df5dnccvhc864" path="res://Assets/Characters/Player/Big_Light_Bright_Yellow.png" id="5_2peue"]
+[ext_resource type="Texture2D" uid="uid://qraler3fbcr8" path="res://Assets/Characters/Player/Lantern_Light_Bright_Yellow.png" id="6_dww6y"]
+[ext_resource type="Script" uid="uid://c1ubxgh2j0ygu" path="res://Scenes/Player/interaction.gd" id="7_evo5w"]
+[ext_resource type="PackedScene" uid="uid://b3py3nevqrjoq" path="res://Interaction/InteractionArea/interaction_area.tscn" id="9_1kiko"]
+
+[sub_resource type="Animation" id="Animation_2peue"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_cio05"]
+resource_name = "attack"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04999999, 0.099999994, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_0i3ku"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_dww6y"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.39999998, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dww6y"]
+_data = {
+&"RESET": SubResource("Animation_2peue"),
+&"attack": SubResource("Animation_cio05"),
+&"idle": SubResource("Animation_0i3ku"),
+&"walk": SubResource("Animation_dww6y")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2peue"]
+radius = 8.0
+height = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cio05"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oum0q"]
+radius = 89.35572
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cio05"]
+size = Vector2(38.75, 39)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_726f1"]
+radius = 22.0
+
+[node name="Red" type="CharacterBody2D" groups=["Player"]]
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_0i3ku")
+
+[node name="StaffSwing" parent="." instance=ExtResource("2_cio05")]
+pitch_scale = 0.7
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+light_mask = 4
+texture = ExtResource("2_dww6y")
+offset = Vector2(6, -32)
+hframes = 4
+vframes = 8
+
+[node name="LanternSide" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(2, -53)
+
+[node name="LanternTarget" type="Node2D" parent="LanternSide"]
+
+[node name="Lantern" type="Node2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-27, -58)
+script = ExtResource("3_2peue")
+target_path = NodePath("../LanternSide/LanternTarget")
+
+[node name="LanternSprite" type="Sprite2D" parent="Lantern"]
+light_mask = 4
+y_sort_enabled = true
+texture = ExtResource("2_0i3ku")
+offset = Vector2(0, 7)
+
+[node name="LanternLight" type="PointLight2D" parent="Lantern/LanternSprite"]
+z_index = 101
+position = Vector2(0, 1)
+scale = Vector2(31.902876, 31.902876)
+energy = 24.0
+texture = ExtResource("5_2peue")
+texture_scale = 0.1
+
+[node name="LanternLight2" type="PointLight2D" parent="Lantern/LanternSprite"]
+light_mask = 2
+z_index = 101
+position = Vector2(0, 1)
+scale = Vector2(14.2120495, 14.2120495)
+energy = 7.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+texture = ExtResource("5_2peue")
+texture_scale = 0.1
+
+[node name="LanternLight3" type="PointLight2D" parent="Lantern/LanternSprite"]
+light_mask = 4
+z_index = 101
+position = Vector2(0, 1)
+scale = Vector2(12.082286, 12.082286)
+energy = 3.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+texture = ExtResource("5_2peue")
+texture_scale = 0.1
+
+[node name="LanternLight4" type="PointLight2D" parent="Lantern/LanternSprite"]
+light_mask = 4
+z_index = 101
+position = Vector2(-1, 1)
+scale = Vector2(1.6653745, 1.1326715)
+energy = 20.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+texture = ExtResource("6_dww6y")
+offset = Vector2(0, 6)
+texture_scale = 0.1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dww6y")
+}
+
+[node name="PlayerCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_2peue")
+
+[node name="LanternCollider" type="CollisionShape2D" parent="."]
+position = Vector2(7, -14)
+shape = SubResource("CircleShape2D_cio05")
+
+[node name="LanternLightArea" type="Area2D" parent="."]
+light_mask = 2
+position = Vector2(0, -32)
+collision_layer = 32
+collision_mask = 64
+
+[node name="LanternLightAreaCollider" type="CollisionShape2D" parent="LanternLightArea"]
+position = Vector2(0, -23)
+scale = Vector2(1.455935, 1.455935)
+shape = SubResource("CircleShape2D_oum0q")
+debug_color = Color(0, 0.75391996, 0.14517105, 0.41960785)
+
+[node name="InteractionRayCast" type="RayCast2D" parent="."]
+position = Vector2(0, -11)
+collision_mask = 8
+collide_with_areas = true
+script = ExtResource("7_evo5w")
+
+[node name="StaffHitbox" type="Area2D" parent="."]
+position = Vector2(19, -19)
+
+[node name="StaffHitbox" type="CollisionShape2D" parent="StaffHitbox"]
+shape = SubResource("RectangleShape2D_cio05")
+
+[node name="InteractionArea" parent="." instance=ExtResource("9_1kiko")]
+position = Vector2(0, -21)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_726f1")
+debug_color = Color(0.9956222, 0, 0.21006176, 0.41960785)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

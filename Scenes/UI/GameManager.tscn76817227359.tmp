@@ -1,0 +1,103 @@
+[gd_scene load_steps=14 format=3 uid="uid://dccjiv8531arx"]
+
+[ext_resource type="Script" uid="uid://dx6q14ydg0y3v" path="res://Scenes/UI/game_manager.gd" id="1_j7f6f"]
+[ext_resource type="Texture2D" uid="uid://1yvykjslbco0" path="res://Assets/Characters/Player/Lantern.png" id="1_jog0u"]
+[ext_resource type="Texture2D" uid="uid://d3wvyy01csmyi" path="res://Assets/Characters/Player/LanternOff.png" id="2_4r78f"]
+[ext_resource type="Texture2D" uid="uid://bm3xxafu61auf" path="res://Assets/Basic UI/Basic UI/QuestBox.png" id="2_6w212"]
+[ext_resource type="Theme" uid="uid://cycgd36bcqa5c" path="res://game_theme.tres" id="2_15rva"]
+[ext_resource type="Texture2D" uid="uid://juddgef02mj7" path="res://Assets/Basic UI/Basic UI/ProgressBar.png" id="3_j7f6f"]
+[ext_resource type="Texture2D" uid="uid://bdhihtjvi6vk0" path="res://Assets/Basic UI/Basic UI/Progress.png" id="4_4r78f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwdwd"]
+atlas = ExtResource("2_6w212")
+region = Rect2(3, 18, 58, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqkpo"]
+atlas = ExtResource("2_4r78f")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7f6f"]
+atlas = ExtResource("1_jog0u")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4r78f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqkpo")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7f6f")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6w212"]
+atlas = ExtResource("3_j7f6f")
+region = Rect2(26, 5, 12, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dinx"]
+atlas = ExtResource("4_4r78f")
+region = Rect2(30, 9, 4, 45)
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_j7f6f")
+
+[node name="QuestBox" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Background" type="Sprite2D" parent="QuestBox"]
+position = Vector2(120, 188)
+scale = Vector2(4, 4)
+texture = SubResource("AtlasTexture_qwdwd")
+
+[node name="QuestTitle" type="RichTextLabel" parent="QuestBox"]
+offset_left = 25.0
+offset_top = 152.0
+offset_right = 216.0
+offset_bottom = 174.0
+theme = ExtResource("2_15rva")
+theme_type_variation = &"QuestLabel"
+theme_override_font_sizes/normal_font_size = 32
+text = "Quest Title"
+
+[node name="QuestDescription" type="RichTextLabel" parent="QuestBox"]
+offset_left = 25.0
+offset_top = 171.0
+offset_right = 216.0
+offset_bottom = 220.0
+theme = ExtResource("2_15rva")
+theme_type_variation = &"QuestLabel"
+text = "This is a quest"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LanternOnOff" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(80, 677)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_4r78f")
+animation = &"on"
+
+[node name="FuelBar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 4.000001
+offset_top = 501.0
+offset_right = 44.0
+offset_bottom = 554.0
+scale = Vector2(4, 4)
+max_value = 500.0
+value = 500.0
+fill_mode = 3
+texture_under = SubResource("AtlasTexture_6w212")
+texture_progress = SubResource("AtlasTexture_4dinx")
+texture_progress_offset = Vector2(4, 4)
+
+[node name="FuelTimer" type="Timer" parent="CanvasLayer"]
+
+[connection signal="timeout" from="CanvasLayer/FuelTimer" to="." method="_on_fuel_timer_timeout"]

@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://b4ylj518b0pft"]
+
+[ext_resource type="Texture2D" uid="uid://cw7dykeii6c4f" path="res://Assets/villagethings/3 Animated Objects/Door1.png" id="1_wjatu"]
+[ext_resource type="Script" uid="uid://djuikutt8efft" path="res://Scenes/Objects/Outposts/door.gd" id="2_r5lhx"]
+[ext_resource type="PackedScene" uid="uid://yojyo3jyijtl" path="res://Interaction/InteractionArea/interactive_area.tscn" id="3_r5lhx"]
+[ext_resource type="PackedScene" uid="uid://cjnpiodpbe3nq" path="res://Scenes/Audio/SFX/close_door.tscn" id="4_ywa8g"]
+[ext_resource type="PackedScene" uid="uid://1xaq4oncues3" path="res://Scenes/Audio/SFX/open_door.tscn" id="5_o4x6a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5lhx"]
+size = Vector2(22, 30)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6523a"]
+radius = 39.012817
+
+[sub_resource type="Animation" id="Animation_r5lhx"]
+resource_name = "open"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_6523a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ywa8g"]
+resource_name = "close"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 4, 3, 2, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6523a"]
+_data = {
+&"RESET": SubResource("Animation_6523a"),
+&"close": SubResource("Animation_ywa8g"),
+&"open": SubResource("Animation_r5lhx")
+}
+
+[node name="Door" type="Sprite2D"]
+light_mask = 4
+texture = ExtResource("1_wjatu")
+hframes = 6
+script = ExtResource("2_r5lhx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="DoorCollider" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-2, 15)
+shape = SubResource("RectangleShape2D_r5lhx")
+debug_color = Color(0.97541493, 0, 0.4230893, 0.41960785)
+
+[node name="InteractiveArea" parent="." instance=ExtResource("3_r5lhx")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea"]
+position = Vector2(-2, 15)
+shape = SubResource("CircleShape2D_6523a")
+debug_color = Color(0.19299799, 0.63482374, 0.28338364, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6523a")
+}
+
+[node name="CloseDoor" parent="." instance=ExtResource("4_ywa8g")]
+
+[node name="OpenDoor" parent="." instance=ExtResource("5_o4x6a")]

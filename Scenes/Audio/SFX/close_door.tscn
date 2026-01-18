@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjnpiodpbe3nq"]
+
+[ext_resource type="AudioStream" uid="uid://dm7uctsvbtaqr" path="res://Assets/Music/close-door.ogg" id="1_0cwfa"]
+
+[node name="CloseDoor" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_0cwfa")
+volume_db = -4.0
