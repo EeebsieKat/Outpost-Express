@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bysgwmbhbr2sb"]
+[gd_scene load_steps=15 format=3 uid="uid://bysgwmbhbr2sb"]
 
 [ext_resource type="PackedScene" uid="uid://g0jlluuu1but" path="res://Scenes/Player/red.tscn" id="1_6ug57"]
 [ext_resource type="PackedScene" uid="uid://crvpwbty738xx" path="res://Scenes/PuzzleRooms/PuzzleElements/puzzle_room_1_reset_button.tscn" id="3_o6p7y"]
@@ -9,10 +9,10 @@
 [ext_resource type="Script" uid="uid://cjtyesfu4i2ct" path="res://Scenes/PuzzleRooms/roof.gd" id="7_ihgwc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ug57"]
-size = Vector2(734.5, 20)
+size = Vector2(1051.25, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5byfo"]
-size = Vector2(781, 20)
+size = Vector2(1025, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6p7y"]
 size = Vector2(20, 381)
@@ -22,6 +22,9 @@ size = Vector2(28, 149)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2hs3"]
 size = Vector2(30, 146)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrlya"]
+size = Vector2(20, 364)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xxpd"]
 size = Vector2(128.34131, 126.593414)
@@ -33,11 +36,11 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
-position = Vector2(329, 347)
+position = Vector2(487.375, 347)
 shape = SubResource("RectangleShape2D_6ug57")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Border"]
-position = Vector2(380.5, 0)
+position = Vector2(502.5, 0)
 shape = SubResource("RectangleShape2D_5byfo")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Border"]
@@ -52,6 +55,10 @@ shape = SubResource("RectangleShape2D_wwta0")
 position = Vector2(637, 265)
 shape = SubResource("RectangleShape2D_b2hs3")
 
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Border"]
+position = Vector2(1003, 174)
+shape = SubResource("RectangleShape2D_mrlya")
+
 [node name="Red" parent="." instance=ExtResource("1_6ug57")]
 position = Vector2(333, 225)
 
@@ -61,16 +68,16 @@ position = Vector2(333, 225)
 position = Vector2(82, 267)
 
 [node name="LightBulb" parent="." instance=ExtResource("3_wwta0")]
-position = Vector2(793, 173)
+position = Vector2(820, 180)
 
 [node name="PuzzleRoom1Door" parent="." instance=ExtResource("4_wwta0")]
-position = Vector2(671, 165)
+position = Vector2(637, 167)
 
 [node name="OpenDoor" parent="." instance=ExtResource("5_b2hs3")]
 position = Vector2(478, 294)
 
 [node name="Roof" type="Sprite2D" parent="."]
-position = Vector2(870.5, 165)
+position = Vector2(845.5, 165)
 scale = Vector2(2.9296875, 2.84375)
 texture = ExtResource("6_mrlya")
 script = ExtResource("7_ihgwc")

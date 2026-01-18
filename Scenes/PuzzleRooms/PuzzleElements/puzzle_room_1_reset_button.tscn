@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://crvpwbty738xx"]
+[gd_scene load_steps=7 format=3 uid="uid://crvpwbty738xx"]
 
 [ext_resource type="Texture2D" uid="uid://sx36nmcodlww" path="res://icon.svg" id="1_c72sp"]
 [ext_resource type="Script" uid="uid://c48gcg4xkpm23" path="res://Scenes/PuzzleRooms/PuzzleElements/puzzle_room_1_reset_button.gd" id="2_mkitj"]
 [ext_resource type="Script" uid="uid://baqlbfn87casn" path="res://Scenes/PuzzleRooms/PuzzleElements/respawn_switches.gd" id="3_c72sp"]
+[ext_resource type="Script" uid="uid://nlx80htmggpp" path="res://Scenes/PuzzleRooms/PuzzleElements/respwan_doors.gd" id="4_0yp6u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mkitj"]
 size = Vector2(30, 30)
@@ -33,5 +34,8 @@ shape = SubResource("RectangleShape2D_maapc")
 
 [node name="Scripts" type="Node" parent="."]
 
-[node name="RespawnSwitches" type="Node" parent="Scripts"]
+[node name="RespawnSwitches" type="Node" parent="Scripts" groups=["light_switch_door"]]
 script = ExtResource("3_c72sp")
+
+[node name="RespwanDoors" type="Node" parent="Scripts" groups=["light_switch_door"]]
+script = ExtResource("4_0yp6u")

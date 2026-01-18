@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhqnfvqd3glqa"]
+
+[ext_resource type="Script" uid="uid://dilusc2dftleo" path="res://Scenes/PuzzleRooms/PuzzleElements/light_switch_door.gd" id="1_lq603"]
+[ext_resource type="Texture2D" uid="uid://sx36nmcodlww" path="res://icon.svg" id="1_y5sqg"]
+[ext_resource type="Script" uid="uid://v8pq3d6074oy" path="res://Scenes/PuzzleRooms/PuzzleElements/LightSwitchDoor.gd" id="2_lq603"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nq1s3"]
+size = Vector2(30, 30.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_maapc"]
+size = Vector2(30, 30)
+
+[node name="LightSwitchDoor" type="Node2D" groups=["light_switch_door"]]
+script = ExtResource("1_lq603")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_y5sqg")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("2_lq603")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_nq1s3")
+
+[node name="Area2D2" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("RectangleShape2D_maapc")

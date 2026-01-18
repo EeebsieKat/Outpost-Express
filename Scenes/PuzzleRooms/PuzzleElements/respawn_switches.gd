@@ -2,7 +2,7 @@ extends Node
 
 var switch_instances := []
 const number_switches:= 3
-var switch_position_y = 69.0
+var switch_position_y = 99.0
 var light_switch_value := [true, false, false]
 
 var light_switch = load("res://Scenes/PuzzleRooms/PuzzleElements/light_switch.tscn")
@@ -26,10 +26,14 @@ func respawn_switches():
 	
 	light_switch_value = [true, false, false]
 	
+	var light_switch_current_value = []
+	
 	for i in switch_instances.size():
 		var random_int = randi_range(0, light_switch_value.size()-1)
 		switch_instances[i].right_switch_value = light_switch_value[random_int]
+		light_switch_current_value.append(light_switch_value[random_int])
 		light_switch_value.remove_at(random_int)
 	
 	get_tree().call_group("LightSwitchReceiver", "reset_light")
 	get_tree().call_group("PuzzleRoom1Door", "reset_door")
+	get_tree().call_group("light_switch_door", "respawn_doors", light_switch_current_value)
