@@ -1,16 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj2pavmumki3y"]
+[gd_scene load_steps=8 format=3 uid="uid://cj2pavmumki3y"]
 
-[ext_resource type="Texture2D" uid="uid://sx36nmcodlww" path="res://icon.svg" id="1_8g1pq"]
+[ext_resource type="Texture2D" uid="uid://trci7kxjgdkm" path="res://Assets/Items/LightBulb.png" id="1_1er2e"]
+[ext_resource type="Script" uid="uid://14r20b8sn3mi" path="res://Scenes/PuzzleRooms/PuzzleElements/animated_light_bulb.gd" id="2_1er2e"]
 [ext_resource type="Script" uid="uid://lv01kl4a2363" path="res://Scenes/PuzzleRooms/PuzzleElements/light_bulb.gd" id="2_8g1pq"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_146xu"]
+atlas = ExtResource("1_1er2e")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnkqj"]
+atlas = ExtResource("1_1er2e")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7yu6k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_146xu")
+}],
+"loop": false,
+"name": &"TurnedOff",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnkqj")
+}],
+"loop": false,
+"name": &"TurnedOn",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_maapc"]
-size = Vector2(29, 27)
+size = Vector2(14.5, 14.5)
 
 [node name="LightBulb" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_8g1pq")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["AnimationLightBulb"]]
+sprite_frames = SubResource("SpriteFrames_7yu6k")
+animation = &"TurnedOff"
+autoplay = "TurnedOff"
+script = ExtResource("2_1er2e")
 
 [node name="Area2D" type="Area2D" parent="." groups=["LightSwitchReceiver"]]
 collision_layer = 8

@@ -3,7 +3,7 @@ extends Node
 var switch_instances := []
 
 const number_switches:= 3
-var switch_position_y = 10.0
+var switch_position_y = 0.0
 
 var light_switch_door = load("res://Scenes/PuzzleRooms/PuzzleElements/light_switch_door.tscn")
 

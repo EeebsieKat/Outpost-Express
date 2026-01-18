@@ -2,8 +2,8 @@ extends Node2D
 
 var door_opened = false
 
-var closed_positon := 165.0
-var opened_position := 115.0
+var closed_positon := 160.0
+var opened_position := 105.0
 
 var direction := 1
 

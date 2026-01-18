@@ -1,21 +1,65 @@
-[gd_scene load_steps=6 format=3 uid="uid://d37m4130ujb4u"]
+[gd_scene load_steps=12 format=3 uid="uid://d37m4130ujb4u"]
 
-[ext_resource type="Texture2D" uid="uid://sx36nmcodlww" path="res://icon.svg" id="2_5x0qy"]
+[ext_resource type="Texture2D" uid="uid://dsa7rwe32dotq" path="res://Assets/Items/2026-01-18_Lever.png" id="2_5x0qy"]
 [ext_resource type="Script" uid="uid://n4xu5ewxngqn" path="res://Scenes/PuzzleRooms/PuzzleElements/light_switch_main.gd" id="2_7lvbd"]
 [ext_resource type="Script" uid="uid://cyww1il51w3d2" path="res://Scenes/PuzzleRooms/PuzzleElements/light_switch.gd" id="2_cpj7u"]
+[ext_resource type="Script" uid="uid://c0u0vgan1qsgo" path="res://Scripts/drawing_order.gd" id="3_5x0qy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5x0qy"]
+atlas = ExtResource("2_5x0qy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qog42"]
+atlas = ExtResource("2_5x0qy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppagi"]
+atlas = ExtResource("2_5x0qy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1u38"]
+atlas = ExtResource("2_5x0qy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ppagi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5x0qy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qog42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppagi")
+}],
+"loop": false,
+"name": &"LeverPulled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1u38")
+}],
+"loop": false,
+"name": &"LeverUnpulled",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nq1s3"]
-size = Vector2(30, 30.5)
+size = Vector2(15, 15.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_maapc"]
-size = Vector2(30, 30)
+size = Vector2(15, 15)
 
 [node name="LightSwitch" type="Node2D" groups=["light_switch"]]
 script = ExtResource("2_7lvbd")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_5x0qy")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ppagi")
+animation = &"LeverPulled"
+autoplay = "LeverUnpulled"
+script = ExtResource("3_5x0qy")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
@@ -23,6 +67,7 @@ collision_mask = 8
 script = ExtResource("2_cpj7u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_nq1s3")
 
 [node name="Area2D2" type="StaticBody2D" parent="."]
@@ -30,4 +75,5 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_maapc")
