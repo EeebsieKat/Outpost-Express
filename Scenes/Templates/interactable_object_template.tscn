@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://io2ssdhisgi5"]
+
+[ext_resource type="Texture2D" uid="uid://sx36nmcodlww" path="res://icon.svg" id="1_rffak"]
+[ext_resource type="Script" uid="uid://bgdp1fo4f38tc" path="res://Scenes/Templates/InteractionTemplate.gd" id="2_maapc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_maapc"]
+size = Vector2(30, 57)
+
+[node name="InteractableObjectTemplate" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_rffak")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("2_maapc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_maapc")
+
+[node name="Area2D2" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_maapc")

@@ -1,0 +1,88 @@
+[gd_scene load_steps=14 format=3 uid="uid://bysgwmbhbr2sb"]
+
+[ext_resource type="PackedScene" uid="uid://g0jlluuu1but" path="res://Scenes/Player/red.tscn" id="1_6ug57"]
+[ext_resource type="PackedScene" uid="uid://crvpwbty738xx" path="res://Scenes/PuzzleRooms/PuzzleElements/puzzle_room_1_reset_button.tscn" id="3_o6p7y"]
+[ext_resource type="PackedScene" uid="uid://cj2pavmumki3y" path="res://Scenes/PuzzleRooms/PuzzleElements/light_bulb.tscn" id="3_wwta0"]
+[ext_resource type="PackedScene" uid="uid://cmbd8ndbl25k7" path="res://Scenes/PuzzleRooms/PuzzleElements/puzzle_room_1_door.tscn" id="4_wwta0"]
+[ext_resource type="PackedScene" uid="uid://c6jqvvelo3bpb" path="res://Scenes/PuzzleRooms/PuzzleElements/open_door.tscn" id="5_b2hs3"]
+[ext_resource type="Texture2D" uid="uid://sx36nmcodlww" path="res://icon.svg" id="6_mrlya"]
+[ext_resource type="Script" uid="uid://cjtyesfu4i2ct" path="res://Scenes/PuzzleRooms/roof.gd" id="7_ihgwc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ug57"]
+size = Vector2(734.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5byfo"]
+size = Vector2(781, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6p7y"]
+size = Vector2(20, 381)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwta0"]
+size = Vector2(28, 149)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2hs3"]
+size = Vector2(30, 146)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xxpd"]
+size = Vector2(128.34131, 126.593414)
+
+[node name="PuzzleRoom1" type="Node2D"]
+
+[node name="Border" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
+position = Vector2(329, 347)
+shape = SubResource("RectangleShape2D_6ug57")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Border"]
+position = Vector2(380.5, 0)
+shape = SubResource("RectangleShape2D_5byfo")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Border"]
+position = Vector2(0, 180.5)
+shape = SubResource("RectangleShape2D_o6p7y")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Border"]
+position = Vector2(640, 68.5)
+shape = SubResource("RectangleShape2D_wwta0")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Border"]
+position = Vector2(637, 265)
+shape = SubResource("RectangleShape2D_b2hs3")
+
+[node name="Red" parent="." instance=ExtResource("1_6ug57")]
+position = Vector2(333, 225)
+
+[node name="Camera2D" type="Camera2D" parent="Red"]
+
+[node name="PuzzleRoom1ResetButton" parent="." instance=ExtResource("3_o6p7y")]
+position = Vector2(82, 267)
+
+[node name="LightBulb" parent="." instance=ExtResource("3_wwta0")]
+position = Vector2(793, 173)
+
+[node name="PuzzleRoom1Door" parent="." instance=ExtResource("4_wwta0")]
+position = Vector2(671, 165)
+
+[node name="OpenDoor" parent="." instance=ExtResource("5_b2hs3")]
+position = Vector2(478, 294)
+
+[node name="Roof" type="Sprite2D" parent="."]
+position = Vector2(870.5, 165)
+scale = Vector2(2.9296875, 2.84375)
+texture = ExtResource("6_mrlya")
+script = ExtResource("7_ihgwc")
+
+[node name="Area2D" type="Area2D" parent="Roof"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof/Area2D"]
+position = Vector2(0.5119324, -0.70328903)
+scale = Vector2(1, 0.9999999)
+shape = SubResource("RectangleShape2D_0xxpd")
+
+[connection signal="body_entered" from="Roof/Area2D" to="Roof" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Roof/Area2D" to="Roof" method="_on_area_2d_body_exited"]

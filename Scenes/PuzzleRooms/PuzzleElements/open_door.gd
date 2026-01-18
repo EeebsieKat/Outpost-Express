@@ -1,0 +1,13 @@
+extends Area2D
+
+var already_opened := false
+
+func interact_with_player():
+	if !already_opened:
+		already_opened = true
+		get_tree().call_group("PuzzleRoom1Door", "_on_open_door")
+	else:
+		print("you already opened the door")
+
+func reset_door():
+	already_opened = false
