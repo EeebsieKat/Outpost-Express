@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://sx36nmcodlww" path="res://icon.svg" id="1_68mu3"]
 [ext_resource type="Script" uid="uid://di3qeekxw5e02" path="res://Scenes/Enemies/blolb.gd" id="1_euphj"]
-[ext_resource type="Script" uid="uid://r7mwag3b1shl" path="res://Scripts/blolb_hit_detection.gd" id="3_oypad"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_euphj"]
 radius = 500.0
@@ -19,6 +18,15 @@ width = 59
 fill = 1
 fill_from = Vector2(0.48210922, 0.50427353)
 fill_to = Vector2(0.47435898, 0.508547)
+
+[sub_resource type="GDScript" id="GDScript_euphj"]
+script/source = "extends Area2D
+#
+#@export var blolbParentNode: Node2D = null
+#
+#func take_damage() -> void:
+	#blolbParentNode.get_script().take_damage()
+"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_euphj"]
 
@@ -49,11 +57,10 @@ shape = SubResource("CapsuleShape2D_q0ilr")
 color = Color(1, 0, 0, 1)
 texture = SubResource("GradientTexture2D_oypad")
 
-[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("blolbParentNode")]
+[node name="HitBox" type="Area2D" parent="."]
 collision_layer = 257
 collision_mask = 0
-script = ExtResource("3_oypad")
-blolbParentNode = NodePath("..")
+script = SubResource("GDScript_euphj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 scale = Vector2(2.195, 2.195)

@@ -10,7 +10,7 @@ extends Node2D
 
 var player: Player
 var is_chasing := false
-var lives := 2
+var lives := 3
 var knockback_velocity := Vector2.ZERO
 var knockback_timer := 0.0
 
@@ -57,5 +57,11 @@ func _on_body_exited(body: Node2D) -> void:
 func take_damage() -> void:
 	print("Blolb Hit!")
 	lives -= 1
+	
+	if player != null:
+		var knockback_direction := (global_position - player.global_position).normalized()
+		knockback_velocity = knockback_direction * knockback_force
+		knockback_timer = knockback_duration
+	
 	if lives <= 0:
 		queue_free()
