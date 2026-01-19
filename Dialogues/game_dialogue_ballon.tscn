@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dblqt5n1pl3cv"]
+[gd_scene load_steps=24 format=3 uid="uid://dblqt5n1pl3cv"]
 
 [ext_resource type="Script" uid="uid://dylbtl0730e5" path="res://Dialogues/game_dialogue_ballon.gd" id="1_7nuv0"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_5hlgj"]
+[ext_resource type="Texture2D" uid="uid://qbg4tio16uoq" path="res://Assets/Basic UI/Basic UI/BasicUIPackImageAll.png" id="2_u77kd"]
+[ext_resource type="FontVariation" uid="uid://dlhrtl67c87ml" path="res://Assets/Fonts/ByteBounceVariant.tres" id="3_2el4x"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_u77kd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
@@ -16,52 +18,91 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ri4m3"]
-bg_color = Color(0.121569, 0.121569, 0.121569, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u77kd"]
+load_path = "res://.godot/imported/BasicUIPackImageAll.png-64b791e6190a2ff2077f8cda062b309b.ctex"
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0njw"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.6, 0.6, 0.6, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="AtlasTexture" id="AtlasTexture_2el4x"]
+atlas = SubResource("CompressedTexture2D_u77kd")
+region = Rect2(137, 7, 32, 32)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkmqt"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g0e42"]
+texture = SubResource("AtlasTexture_2el4x")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+modulate_color = Color(0.585062, 0.585062, 0.5850621, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8w86j"]
+load_path = "res://.godot/imported/BasicUIPackImageAll.png-64b791e6190a2ff2077f8cda062b309b.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hj7bs"]
+atlas = SubResource("CompressedTexture2D_8w86j")
+region = Rect2(137, 7, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2pnwh"]
+texture = SubResource("AtlasTexture_hj7bs")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+modulate_color = Color(0.69135684, 0.6913568, 0.69135684, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0e42"]
+atlas = ExtResource("2_u77kd")
+region = Rect2(137, 7, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8w86j"]
+texture = SubResource("AtlasTexture_g0e42")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w2ais"]
+load_path = "res://.godot/imported/BasicUIPackImageAll.png-64b791e6190a2ff2077f8cda062b309b.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khi16"]
+atlas = SubResource("CompressedTexture2D_w2ais")
+region = Rect2(137, 7, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_52agk"]
+texture = SubResource("AtlasTexture_khi16")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+modulate_color = Color(0.40832946, 0.40832946, 0.40832946, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqn7o"]
+atlas = ExtResource("2_u77kd")
+region = Rect2(175, 7, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hj7bs"]
+texture = SubResource("AtlasTexture_rqn7o")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
 [sub_resource type="Theme" id="Theme_qq3yp"]
 default_font_size = 20
+Button/colors/font_color = Color(0.07058824, 0.023529412, 0.07058824, 1)
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("3_2el4x")
 Button/styles/disabled = SubResource("StyleBoxFlat_spyqn")
-Button/styles/focus = SubResource("StyleBoxFlat_ri4m3")
-Button/styles/hover = SubResource("StyleBoxFlat_e0njw")
-Button/styles/normal = SubResource("StyleBoxFlat_e0njw")
+Button/styles/focus = SubResource("StyleBoxTexture_g0e42")
+Button/styles/hover = SubResource("StyleBoxTexture_2pnwh")
+Button/styles/normal = SubResource("StyleBoxTexture_8w86j")
+Button/styles/pressed = SubResource("StyleBoxTexture_52agk")
 MarginContainer/constants/margin_bottom = 15
 MarginContainer/constants/margin_left = 30
 MarginContainer/constants/margin_right = 30
 MarginContainer/constants/margin_top = 15
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_qkmqt")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_hj7bs")
+RichTextLabel/colors/default_color = Color(0.07058824, 0.023529412, 0.07058824, 1)
+RichTextLabel/font_sizes/normal_font_size = 48
+RichTextLabel/fonts/normal_font = ExtResource("3_2el4x")
 
 [sub_resource type="Animation" id="Animation_nlsx6"]
 length = 0.001

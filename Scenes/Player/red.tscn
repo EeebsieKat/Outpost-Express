@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://g0jlluuu1but"]
+[gd_scene load_steps=21 format=3 uid="uid://g0jlluuu1but"]
 
 [ext_resource type="Script" uid="uid://by17drtefw5bn" path="res://Scenes/Player/red.gd" id="1_0i3ku"]
 [ext_resource type="Texture2D" uid="uid://1yvykjslbco0" path="res://Assets/Characters/Player/Lantern.png" id="2_0i3ku"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://qraler3fbcr8" path="res://Assets/Characters/Player/Lantern_Light_Bright_Yellow.png" id="6_dww6y"]
 [ext_resource type="Script" uid="uid://c1ubxgh2j0ygu" path="res://Scenes/Player/interaction.gd" id="7_evo5w"]
 [ext_resource type="PackedScene" uid="uid://b3py3nevqrjoq" path="res://Interaction/InteractionArea/interaction_area.tscn" id="9_1kiko"]
+[ext_resource type="Script" uid="uid://dyd3qoq746u8a" path="res://Scenes/Player/hit_visual_effect.gd" id="10_726f1"]
 
 [sub_resource type="Animation" id="Animation_2peue"]
 length = 0.001
@@ -102,11 +103,12 @@ size = Vector2(38.75, 39)
 [sub_resource type="CircleShape2D" id="CircleShape2D_726f1"]
 radius = 22.0
 
-[node name="Red" type="CharacterBody2D" groups=["Player"]]
+[node name="Red" type="CharacterBody2D" node_paths=PackedStringArray("hitNode2D") groups=["Player"]]
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_0i3ku")
+hitNode2D = NodePath("HitVisualEffect")
 
 [node name="StaffSwing" parent="." instance=ExtResource("2_cio05")]
 pitch_scale = 0.7
@@ -215,6 +217,8 @@ script = ExtResource("7_evo5w")
 
 [node name="StaffHitbox" type="Area2D" parent="."]
 position = Vector2(19, -19)
+scale = Vector2(3, 3)
+collision_mask = 256
 
 [node name="StaffHitbox" type="CollisionShape2D" parent="StaffHitbox"]
 shape = SubResource("RectangleShape2D_cio05")
@@ -225,5 +229,18 @@ position = Vector2(0, -21)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_726f1")
 debug_color = Color(0.9956222, 0, 0.21006176, 0.41960785)
+
+[node name="HitVisualEffect" type="Node2D" parent="."]
+visible = false
+position = Vector2(-29.825, 0)
+scale = Vector2(50, 50)
+script = ExtResource("10_726f1")
+
+[node name="ColorRect" type="ColorRect" parent="HitVisualEffect"]
+offset_left = -19.023499
+offset_top = -19.96
+offset_right = 20.976501
+offset_bottom = 20.04
+color = Color(1, 0, 0, 0.30980393)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
