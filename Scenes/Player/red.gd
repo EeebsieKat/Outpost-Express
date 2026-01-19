@@ -102,6 +102,12 @@ func attack() -> void:
 	is_attacking = true
 	staff_swing.play()
 	anim.play("attack")
+	for area in staff_hitbox.get_overlapping_areas():
+		print("area detected")
+		var owner = area.get_parent()
+		if owner and owner.has_method("take_damage"):
+			print("owner has take damage")
+			owner.take_damage()
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
