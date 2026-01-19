@@ -4,6 +4,8 @@ extends CharacterBody2D
 # Signals:
 signal lantern_state_changed(state: bool)
 
+@onready var red: Player = $"."
+
 @onready var staff_swing: AudioStreamPlayer2D = $StaffSwing
 
 @onready var sprite: Sprite2D = $PlayerSprite
@@ -26,6 +28,8 @@ var staff_hitbox_offset: int = 19
 # Colliders
 @onready var lantern_light_area_collider: CollisionShape2D = $LanternLightArea/LanternLightAreaCollider
 
+@export var respawn_pos: Node2D
+
 @export var movement_speed : float = 200
 var character_direction : Vector2
 
@@ -36,6 +40,11 @@ var lives := 3
 var invincible := false
 var invincible_timer := 0.0
 const INVINCIBLE_DURATION := 1.0
+
+@export var respawn_freeze_time := 0.5
+
+var respawn_timer := 0.0
+var is_respawning := false
 
 #Knockback:
 @export var knockback_force := 600.0
@@ -62,6 +71,16 @@ func _process(_delta):
 		)
 
 func _physics_process(delta: float) -> void:
+	if is_respawning:
+		respawn_timer -= delta
+		velocity = Vector2.ZERO
+
+		if respawn_timer <= 0:
+			is_respawning = false
+
+		move_and_slide()
+		return
+		
 	if invincible:
 		invincible_timer -= delta
 		if invincible_timer <= 0:
@@ -105,19 +124,22 @@ func _physics_process(delta: float) -> void:
 
 	lantern_target.position.y = lantern_height
 	
-	if character_direction:
+	if character_direction != Vector2.ZERO:
 		if is_attacking:
 			return
+
 		velocity = character_direction * movement_speed
-		if !anim.is_playing() or anim.current_animation != "walk":
+
+		if anim.current_animation != "walk":
 			anim.play("walk")
 	else:
 		if is_attacking:
 			return
+
 		velocity = velocity.move_toward(Vector2.ZERO, movement_speed)
-	if !anim.is_playing() or anim.current_animation != "idle":
-				anim.play("idle")
-			
+
+		if anim.current_animation != "idle":
+			anim.play("idle")
 	move_and_slide()
 	
 	for i in get_slide_collision_count():
@@ -134,7 +156,7 @@ func attack() -> void:
 		print("area detected")
 		var owner = area.get_parent()
 		if owner and owner.has_method("take_damage"):
-			print("owner has take damage")
+			print("owner has taken damage")
 			owner.take_damage()
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -157,4 +179,22 @@ func take_player_damage(damage_source: Node2D = null) -> void:
 	
 	if lives <= 0:
 		print("Red died!")
-		queue_free()
+
+		# Cancel knockback completely
+		knockback_timer = 0.0
+		knockback_velocity = Vector2.ZERO
+
+		# Teleport to respawn
+		global_position = respawn_pos.global_position
+
+		# Respawn freeze
+		is_respawning = true
+		respawn_timer = respawn_freeze_time
+		velocity = Vector2.ZERO
+		invincible = true
+		invincible_timer = 2.0
+
+		return
+
+func get_facing_direction() -> Vector2:
+	return Vector2.RIGHT if not sprite.flip_h else Vector2.LEFT

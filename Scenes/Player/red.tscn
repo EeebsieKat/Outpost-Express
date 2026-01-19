@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://qraler3fbcr8" path="res://Assets/Characters/Player/Lantern_Light_Bright_Yellow.png" id="6_dww6y"]
 [ext_resource type="Script" uid="uid://c1ubxgh2j0ygu" path="res://Scenes/Player/interaction.gd" id="7_evo5w"]
 [ext_resource type="PackedScene" uid="uid://b3py3nevqrjoq" path="res://Interaction/InteractionArea/interaction_area.tscn" id="9_1kiko"]
-[ext_resource type="Script" uid="uid://dyd3qoq746u8a" path="res://Scenes/Player/hit_visual_effect.gd" id="10_726f1"]
+[ext_resource type="Script" path="res://Scenes/Player/hit_visual_effect.gd" id="10_726f1"]
 
 [sub_resource type="Animation" id="Animation_2peue"]
 length = 0.001

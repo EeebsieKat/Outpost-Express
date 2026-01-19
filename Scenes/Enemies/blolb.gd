@@ -3,7 +3,9 @@ extends Node2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var detection_area: Area2D = $Area2D
 @onready var detection_collision: CollisionShape2D = $Area2D/CollisionShape2D
+@onready var blolb_hit: AudioStreamPlayer2D = $BlolbHit
 
+@export var target_offset_y := -16.0
 @export var chase_speed := 100.0
 @export var knockback_force := 200.0
 @export var knockback_duration := 0.3
@@ -23,7 +25,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if player == null:
 		return
-	
+
 	if knockback_timer > 0:
 		knockback_timer -= delta
 		global_position += knockback_velocity * delta
@@ -38,7 +40,15 @@ func should_chase() -> void:
 	is_chasing = detection_area.overlaps_body(player) and player.lantern_on
 
 func move_toward_player() -> void:
-	var direction := (player.global_position - global_position).normalized()
+	var target_pos := player.global_position + Vector2(0, target_offset_y)
+	var direction := (target_pos - global_position).normalized()
+
+	# Flip sprite
+	if direction.x > 0:
+		sprite.flip_h = false
+	elif direction.x < 0:
+		sprite.flip_h = true
+
 	global_position += direction * chase_speed * get_process_delta_time()
 
 func _find_player() -> void:
@@ -56,6 +66,7 @@ func _on_body_exited(body: Node2D) -> void:
 
 func take_damage() -> void:
 	print("Blolb Hit!")
+	blolb_hit.play()
 	lives -= 1
 	
 	if player != null:
@@ -64,4 +75,5 @@ func take_damage() -> void:
 		knockback_timer = knockback_duration
 	
 	if lives <= 0:
+		blolb_hit.play()
 		queue_free()
