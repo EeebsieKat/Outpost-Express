@@ -1,6 +1,7 @@
 class_name BaseGameDialogueBalloon extends CanvasLayer
 ## A basic dialogue balloon for use with Dialogue Manager.
 
+signal dialogue_finished
 
 ## The dialogue resource
 @export var dialogue_resource: DialogueResource
@@ -37,11 +38,14 @@ var _locale: String = TranslationServer.get_locale()
 ## The current line
 var dialogue_line: DialogueLine:
 	set(value):
+		print("Dialogue line set to:", value)
 		if value:
 			dialogue_line = value
 			apply_dialogue_line()
 		else:
-			# The dialogue has finished so close the balloon
+			print("DIALOGUE ACTUALLY ENDED")
+			dialogue_finished.emit()
+
 			if owner == null:
 				queue_free()
 			else:
