@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://crvpwbty738xx"]
+
+[ext_resource type="Texture2D" uid="uid://dsa7rwe32dotq" path="res://Assets/Items/2026-01-18_Lever.png" id="1_rlnkx"]
+[ext_resource type="Script" uid="uid://c48gcg4xkpm23" path="res://Scenes/PuzzleRooms/PuzzleElements/puzzle_room_1_reset_button.gd" id="2_mkitj"]
+[ext_resource type="Script" uid="uid://c0u0vgan1qsgo" path="res://Scripts/drawing_order.gd" id="2_vykiq"]
+[ext_resource type="Script" uid="uid://baqlbfn87casn" path="res://Scenes/PuzzleRooms/PuzzleElements/respawn_switches.gd" id="3_c72sp"]
+[ext_resource type="Script" uid="uid://nlx80htmggpp" path="res://Scenes/PuzzleRooms/PuzzleElements/respwan_doors.gd" id="4_0yp6u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bps5n"]
+atlas = ExtResource("1_rlnkx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kl5n4"]
+atlas = ExtResource("1_rlnkx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvbrt"]
+atlas = ExtResource("1_rlnkx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yjcy"]
+atlas = ExtResource("1_rlnkx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fbblc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bps5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kl5n4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvbrt")
+}],
+"loop": false,
+"name": &"Pulled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yjcy")
+}],
+"loop": false,
+"name": &"Unpulled",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkitj"]
+size = Vector2(15, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_maapc"]
+size = Vector2(15, 15)
+
+[node name="PuzzleRoom1ResetButton" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fbblc")
+animation = &"Pulled"
+script = ExtResource("2_vykiq")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("2_mkitj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_mkitj")
+
+[node name="Area2D2" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_maapc")
+
+[node name="Scripts" type="Node" parent="."]
+
+[node name="RespawnSwitches" type="Node" parent="Scripts" groups=["light_switch_door"]]
+script = ExtResource("3_c72sp")
+
+[node name="RespwanDoors" type="Node" parent="Scripts" groups=["light_switch_door"]]
+script = ExtResource("4_0yp6u")

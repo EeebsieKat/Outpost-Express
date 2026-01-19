@@ -48,6 +48,11 @@ folder_colors={
 "res://addons/": "pink"
 }
 
+[global_group]
+
+light_switch_door=""
+AnimationLightBulb=""
+
 [input]
 
 left={

@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkoyolg3e4lh2"]
+
+[ext_resource type="Texture2D" uid="uid://bikqdi2axonvq" path="res://Assets/main-characters-home-free-top-down-pixel-art-asset/Tiled_files/walls_floor.png" id="1_wvo84"]
+[ext_resource type="Script" uid="uid://b7xxc2njkj8l5" path="res://Scenes/PuzzleRooms/PuzzleElements/riddle_final_room_door.gd" id="2_7b8me"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7b8me"]
+atlas = ExtResource("1_wvo84")
+region = Rect2(128, 208, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6eoyb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7b8me")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_maapc"]
+size = Vector2(16, 16)
+
+[node name="Riddle1FinalRoomDoor" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6eoyb")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("2_7b8me")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_maapc")
+
+[node name="Area2D2" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("RectangleShape2D_maapc")

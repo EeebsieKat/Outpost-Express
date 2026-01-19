@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://bhqnfvqd3glqa"]
+
+[ext_resource type="Script" uid="uid://dilusc2dftleo" path="res://Scenes/PuzzleRooms/PuzzleElements/light_switch_door.gd" id="1_lq603"]
+[ext_resource type="Texture2D" uid="uid://cjyjhco8oi6vx" path="res://Assets/main-characters-home-free-top-down-pixel-art-asset/Tiled_files/Doors_windows_animation.png" id="2_kqa7q"]
+[ext_resource type="Script" uid="uid://v8pq3d6074oy" path="res://Scenes/PuzzleRooms/PuzzleElements/LightSwitchDoor.gd" id="2_lq603"]
+[ext_resource type="Script" uid="uid://c0u0vgan1qsgo" path="res://Scripts/drawing_order.gd" id="3_kqa7q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2b78b"]
+atlas = ExtResource("2_kqa7q")
+region = Rect2(0, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqa7q"]
+atlas = ExtResource("2_kqa7q")
+region = Rect2(0, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmh2a"]
+atlas = ExtResource("2_kqa7q")
+region = Rect2(0, 96, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x20xx"]
+atlas = ExtResource("2_kqa7q")
+region = Rect2(0, 0, 30, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x20xx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2b78b")
+}],
+"loop": false,
+"name": &"Closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqa7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmh2a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x20xx")
+}],
+"loop": false,
+"name": &"Opened",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nq1s3"]
+size = Vector2(30, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_maapc"]
+size = Vector2(30, 30)
+
+[node name="LightSwitchDoor" type="Node2D" groups=["light_switch_door"]]
+script = ExtResource("1_lq603")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1000
+sprite_frames = SubResource("SpriteFrames_x20xx")
+animation = &"Opened"
+autoplay = "Closed"
+script = ExtResource("3_kqa7q")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("2_lq603")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_nq1s3")
+
+[node name="Area2D2" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_maapc")
