@@ -1,10 +1,10 @@
 class_name Player
 extends CharacterBody2D
 
+# Signals:
 signal lantern_state_changed(state: bool)
 
 @onready var staff_swing: AudioStreamPlayer2D = $StaffSwing
-
 
 @onready var sprite: Sprite2D = $PlayerSprite
 @onready var anim: AnimationPlayer = $AnimationPlayer
@@ -32,6 +32,19 @@ var character_direction : Vector2
 var is_attacking: bool = false
 var remaining_fuel = GameManager.fuel_amount
 var lantern_on := true
+var lives := 3
+var invincible := false
+var invincible_timer := 0.0
+const INVINCIBLE_DURATION := 1.0
+
+#Knockback:
+@export var knockback_force := 600.0
+@export var knockback_duration := 0.25
+var knockback_velocity := Vector2.ZERO
+var knockback_timer := 0.0
+
+#hit visual effect:
+@export var hitNode2D: Node2D = null
 
 @onready var interaction_ray_cast: RayCast2D = $InteractionRayCast
 
@@ -48,8 +61,18 @@ func _process(_delta):
 			!lantern_on
 		)
 
-
 func _physics_process(delta: float) -> void:
+	if invincible:
+		invincible_timer -= delta
+		if invincible_timer <= 0:
+			invincible = false
+	
+	if knockback_timer > 0:
+		knockback_timer -= delta
+		velocity = knockback_velocity
+		move_and_slide()
+		return
+	
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		attack()
 		
@@ -93,10 +116,16 @@ func _physics_process(delta: float) -> void:
 		if is_attacking:
 			return
 		velocity = velocity.move_toward(Vector2.ZERO, movement_speed)
-		if !anim.is_playing() or anim.current_animation != "idle":
-			anim.play("idle")
+	if !anim.is_playing() or anim.current_animation != "idle":
+				anim.play("idle")
 			
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().get_parent() is Node2D and collision.get_collider().get_parent().has_method("take_damage"):
+			if not invincible:
+				take_damage(collision.get_collider().get_parent())
 
 func attack() -> void:
 	is_attacking = true
@@ -109,7 +138,24 @@ func attack() -> void:
 			print("owner has take damage")
 			owner.take_damage()
 
-
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if is_attacking:
 		is_attacking = false
+
+func take_damage(damage_source: Node2D = null) -> void:
+	lives -= 1
+	print("Red took damage! Lives remaining: ", lives)
+	
+	hitNode2D.toggle_visibility(true)
+	
+	invincible = true
+	invincible_timer = INVINCIBLE_DURATION
+	
+	if damage_source != null:
+		var knockback_direction := (global_position - damage_source.global_position).normalized()
+		knockback_velocity = knockback_direction * knockback_force
+		knockback_timer = knockback_duration
+	
+	if lives <= 0:
+		print("Red died!")
+		queue_free()

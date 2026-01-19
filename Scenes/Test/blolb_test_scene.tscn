@@ -10,7 +10,7 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8utfd"]
 blend_mode = 3
 
-[node name="MainTestScene" type="Node2D"]
+[node name="BlolbTestScene" type="Node2D"]
 
 [node name="BGMusic" parent="." instance=ExtResource("1_24iki")]
 autoplay = false
