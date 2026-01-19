@@ -124,7 +124,7 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(i)
 		if collision.get_collider().get_parent() is Node2D and collision.get_collider().get_parent().has_method("take_damage"):
 			if not invincible:
-				take_damage(collision.get_collider().get_parent())
+				take_player_damage(collision.get_collider().get_parent())
 
 func attack() -> void:
 	is_attacking = true
@@ -141,7 +141,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if is_attacking:
 		is_attacking = false
 
-func take_damage(damage_source: Node2D = null) -> void:
+func take_player_damage(damage_source: Node2D = null) -> void:
 	lives -= 1
 	print("Red took damage! Lives remaining: ", lives)
 	
