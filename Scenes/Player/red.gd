@@ -69,8 +69,7 @@ func _physics_process(delta: float) -> void:
 	
 	if knockback_timer > 0:
 		knockback_timer -= delta
-		velocity = knockback_velocity
-		move_and_slide()
+		global_position += knockback_velocity * delta
 		return
 	
 	if Input.is_action_just_pressed("attack") and not is_attacking:
