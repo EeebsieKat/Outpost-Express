@@ -6,6 +6,11 @@ Nathan: Here are some choices.
 - Second one
 	Nathan: You picked the second one.
 - Start again => start
-- End the conversation => END
+- End the conversation
+	do GameDialogueManager._on_dialogue_ended_give_package()
+	 => END
 Nathan: For more information see the online documentation.
+
+do GameDialogueManager._on_dialogue_ended_give_package()
 => END
+

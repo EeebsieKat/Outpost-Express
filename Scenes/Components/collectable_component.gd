@@ -3,6 +3,8 @@ extends Area2D
 
 @export var collectable_name: String
 
+# Quest = null
+# what is quest?
 var quest: Quest
 
 func _on_body_entered(body: Node2D) -> void:
