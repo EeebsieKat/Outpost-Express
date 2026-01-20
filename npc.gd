@@ -1,8 +1,9 @@
 extends Node2D
 
-# Note: we still need UI art for dialogues
 # Note: you can use this as an prefab for dialogues.
 # only thing to change is the path in line 13 and the if statement
+
+var package_position = 50
 
 var ballon_scene = preload("res://Dialogues/game_dialogue_ballon.tscn")
 
@@ -18,4 +19,4 @@ func interact_with_player():
 func spawn_package():
 	var package = package_scene.instantiate()
 	get_tree().current_scene.add_child(package)
-	package.position.y += 50
+	package.position.y += package_position
