@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6da57g41ku7u"]
+
+[ext_resource type="Script" uid="uid://dty6uibn3o2pw" path="res://Scenes/Enemies/whispergoo.gd" id="1_sty41"]
+[ext_resource type="Texture2D" uid="uid://bnvrwx3okep87" path="res://Assets/Characters/Whispergoo_Idle.png" id="2_sty41"]
+[ext_resource type="PackedScene" uid="uid://cmjl16j6dh1n1" path="res://Scenes/Audio/SFX/whispergoo_ambient.tscn" id="3_6xw0m"]
+[ext_resource type="PackedScene" uid="uid://dksvno4wtt6iy" path="res://Scenes/Audio/SFX/blolb_hit.tscn" id="4_gl45n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_euphj"]
+radius = 188.06648
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oypad"]
+radius = 52.009613
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rj5r5"]
+
+[sub_resource type="Animation" id="Animation_rj5r5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_oypad"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_gl45n"]
+resource_name = "walk"
+step = 0.1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rj5r5"]
+_data = {
+&"RESET": SubResource("Animation_rj5r5"),
+&"idle": SubResource("Animation_oypad"),
+&"walk": SubResource("Animation_gl45n")
+}
+
+[node name="whispergoo" type="Node2D"]
+script = ExtResource("1_sty41")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 4
+scale = Vector2(2, 2)
+texture = ExtResource("2_sty41")
+hframes = 8
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_euphj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1, 22)
+shape = SubResource("CircleShape2D_oypad")
+
+[node name="HitArea" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(-1, 22)
+shape = SubResource("CircleShape2D_oypad")
+disabled = true
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 257
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-1, 22)
+scale = Vector2(2.195, 2.195)
+shape = SubResource("CircleShape2D_rj5r5")
+debug_color = Color(0.96486133, 0, 0.49310243, 0.41960785)
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rj5r5")
+}
+autoplay = "idle"
+
+[node name="WhispergooAmbient" parent="." instance=ExtResource("3_6xw0m")]
+autoplay = true
+
+[node name="BlolbHit" parent="." instance=ExtResource("4_gl45n")]
+
+[connection signal="finished" from="WhispergooAmbient" to="." method="_on_whispergoo_ambient_finished"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmjl16j6dh1n1"]
+
+[ext_resource type="AudioStream" uid="uid://btxg1qdal7ams" path="res://Assets/Music/whispergoo_amb_1.ogg" id="1_exhjj"]
+[ext_resource type="AudioStream" uid="uid://nn5d18w1c5fj" path="res://Assets/Music/whispergoo_amb_2.ogg" id="2_aitny"]
+[ext_resource type="AudioStream" uid="uid://wygj6k2ww3sg" path="res://Assets/Music/whispergoo_amb_3.ogg" id="3_vcqtn"]
+[ext_resource type="AudioStream" uid="uid://c123kasxxof0j" path="res://Assets/Music/whispergoo_amb_4.ogg" id="4_fr2ud"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1ohre"]
+random_pitch = 1.5
+random_volume_offset_db = 1.0
+streams_count = 4
+stream_0/stream = ExtResource("1_exhjj")
+stream_1/stream = ExtResource("2_aitny")
+stream_2/stream = ExtResource("3_vcqtn")
+stream_3/stream = ExtResource("4_fr2ud")
+
+[node name="WhispergooAmbient" type="AudioStreamPlayer2D"]
+stream = SubResource("AudioStreamRandomizer_1ohre")
+volume_db = -15.0

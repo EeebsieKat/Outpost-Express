@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://dai6et51k7mhe"]
+
+[ext_resource type="Texture2D" uid="uid://do377wacdytit" path="res://Assets/MapleTales (Updated Characters)/MapleTales/Characters/BearIdle.png" id="1_crq0n"]
+[ext_resource type="Script" uid="uid://bp80wkxaaubk7" path="res://Scenes/NPCs/bejr.gd" id="1_mfoit"]
+[ext_resource type="PackedScene" uid="uid://o8qem72cy2ig" path="res://Interaction/InteractionArea/interactive_area_npc.tscn" id="3_mfoit"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crq0n"]
+atlas = ExtResource("1_crq0n")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfoit"]
+atlas = ExtResource("1_crq0n")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a4cfe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crq0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfoit")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a4cfe"]
+radius = 21.095022
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mfoit"]
+radius = 5.0990195
+
+[node name="Bejr" type="Node2D"]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+script = ExtResource("1_mfoit")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 4
+sprite_frames = SubResource("SpriteFrames_a4cfe")
+autoplay = "default"
+offset = Vector2(0, -8)
+
+[node name="InteractiveArea" parent="." instance=ExtResource("3_mfoit")]
+position = Vector2(0, -8)
+collision_layer = 4
+collision_mask = 258
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea"]
+shape = SubResource("CircleShape2D_a4cfe")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -8)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_mfoit")
+debug_color = Color(0.8443307, 0.34985217, 0.39620712, 0.41960785)
+
+[connection signal="body_entered" from="InteractiveArea" to="." method="_on_body_entered"]

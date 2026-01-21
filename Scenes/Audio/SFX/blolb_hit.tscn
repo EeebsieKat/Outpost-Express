@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dksvno4wtt6iy"]
+
+[ext_resource type="AudioStream" uid="uid://bndybqw47m4nm" path="res://Assets/Music/blolb_hit.ogg" id="1_2g5pi"]
+
+[node name="BlolbHit" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_2g5pi")

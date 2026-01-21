@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://1eca81bf1kwf"
+path="res://.godot/imported/Bejr.dialogue-7f543c14da7379c22f846b047a04958e.tres"
+
+[deps]
+
+source_file="res://Dialogues/Conversations/Bejr.dialogue"
+dest_files=["res://.godot/imported/Bejr.dialogue-7f543c14da7379c22f846b047a04958e.tres"]
+
+[params]
+
+defaults=true

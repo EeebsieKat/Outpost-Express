@@ -1,0 +1,14 @@
+~ start
+Bejr: Howdy there, Red! Glad to see you!
+Bejr: How've you been?
+- Good!
+	Bejr: Fantastic! Now, I've got a package for you to deliver to *OUTPOST 2*.
+	Bejr: Can you do that for me?
+	- Of course!
+- Not great...
+	Bejr: Sorry to hear that, mate. Would you be up to delivering a package for me?
+	Bejr: It needs to get to *OUTPOST 2*.
+	- Yeah, I can.
+Bejr: Wonderful! Pick up the package from Crome over there.
+Bejr: See you later!
+=> END
