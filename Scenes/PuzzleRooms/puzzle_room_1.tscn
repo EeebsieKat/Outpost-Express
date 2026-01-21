@@ -229,7 +229,7 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_mrlya")
 
-[node name="PuzzleRoom1" type="Node2D"]
+[node name="PuzzleRoom2" type="Node2D"]
 
 [node name="Red" parent="." instance=ExtResource("1_6ug57")]
 position = Vector2(333, 225)
