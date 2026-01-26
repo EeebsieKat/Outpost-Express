@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bkmfj4xb70h5y"]
+[gd_scene load_steps=8 format=4 uid="uid://bkmfj4xb70h5y"]
 
 [ext_resource type="PackedScene" uid="uid://4rnbeintaaxy" path="res://Scenes/Audio/Music/bg_music.tscn" id="1_24iki"]
 [ext_resource type="TileSet" uid="uid://b27lgf1blu5ah" path="res://Tilesets/game_tileset.tres" id="2_kq2la"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://g0jlluuu1but" path="res://Scenes/Player/red.tscn" id="4_bo6wk"]
 [ext_resource type="PackedScene" uid="uid://bl87g71jsgef4" path="res://Scenes/NPCs/npc.tscn" id="5_03s6b"]
 [ext_resource type="PackedScene" uid="uid://dcn4feqhgsygm" path="res://Scenes/Enemies/blolb.tscn" id="6_kq2la"]
-[ext_resource type="PackedScene" uid="uid://c6da57g41ku7u" path="res://Scenes/Enemies/whispergoo.tscn" id="7_6qiuj"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8utfd"]
 blend_mode = 3
@@ -45,8 +44,18 @@ tile_set = ExtResource("2_kq2la")
 [node name="blolb" parent="Objects" instance=ExtResource("6_kq2la")]
 position = Vector2(-296, 101)
 
-[node name="whispergoo" parent="Objects" instance=ExtResource("7_6qiuj")]
+[node name="whispergoo" parent="Objects"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(393, 167)
+script = null
 
 [node name="Red" parent="Objects" node_paths=PackedStringArray("respawn_pos") instance=ExtResource("4_bo6wk")]
 position = Vector2(-25, -33)
